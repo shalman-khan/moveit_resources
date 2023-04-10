@@ -221,4 +221,44 @@
         <limit effort="20" lower="0.0" upper="0.04" velocity="0.2" />
         <mimic joint="panda_finger_joint1" />
     </joint>
+    <!-- Added Static Camera for Exercise 4 Training -->
+
+    <link name="static_camera">
+        <visual>
+            <origin rpy="0 0 0" xyz="0.0 0 0.0" />
+            <geometry>
+                <mesh filename="package://moveit_resources_panda_description/meshes/visual/d435.dae" />
+            </geometry>
+            <material name="camera">
+                <color rgba="0 0 1 1"/>
+            </material>
+        </visual>
+    </link>
+    
+    <joint name="base_to_static_camera" type="fixed">
+        <origin rpy="0 3.14 0" xyz="1.0 0 1.0" />
+        <parent link="panda_link0" />
+        <child link="static_camera" />
+        <axis xyz="0 0 0" />
+    </joint>
+
+    <link name="table">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 -0.15" />
+            <geometry>
+                <box size="1.0 1.0 0.3"/>
+            </geometry>
+            <material name="table">
+                <color rgba="0.46 0.34 0.17 1"/>
+            </material>
+        </visual>
+    </link>
+    
+    <joint name="panda_link0_to_table" type="fixed">
+        <origin rpy="0 0 0" xyz="0 0 0" />
+        <parent link="panda_link0" />
+        <child link="table" />
+        <axis xyz="0 0 0" />
+    </joint>
+
 </robot>
